@@ -28,16 +28,16 @@ class _SplashScreenState extends State<SplashScreen> {
     // neu man hinh nay khong ton tai thi khong lam gi nua
     if(!mounted) return;
 
-    // if(session != null){
-    //   Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (_) => HomeScreen()) // neu da co dang nhap truoc thi vao thang home screen
-    //   );
-    // }
-    // else{
-    //   Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (_) => LoginScreen()) // neu chua dang nhap thi vao Login Screen
-    //   );
-    // }
+    if(session != null){
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => HomeScreen()) // neu da co dang nhap truoc thi vao thang home screen
+      );
+    }
+    else{
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => LoginScreen()) // neu chua dang nhap thi vao Login Screen
+      );
+    }
   }
   @override
   Widget build(BuildContext context) {
