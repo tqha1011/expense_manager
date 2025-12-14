@@ -1,9 +1,11 @@
+import 'package:expense_manager/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'views/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_manager/view_models/auth_view_model.dart';
+import 'views/auth/auth_screen.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +32,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/auth': (context) => const AuthScreen(), // Thêm tham số onSwitch nếu cần 
+      },
     );
   }
 }
