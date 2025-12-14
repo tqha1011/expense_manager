@@ -2,7 +2,7 @@ import 'package:expense_manager/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:expense_manager/views/auth/login_screen.dart';
+import 'auth/auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
     else{
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => LoginScreen()) // neu chua dang nhap thi vao Login Screen
+        MaterialPageRoute(builder: (_) => AuthScreen()) // neu chua dang nhap thi vao Login Screen
       );
     }
   }
