@@ -1,0 +1,44 @@
+# This workflow will automatically test my code before push in main and pull request to main
+
+name: Flutter Auto Test
+
+on:
+  # test after creating pull request
+  pull_request:
+    branches: [ "main" ]
+
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Bring code to virtual machine
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # install flutter sdk
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: 'any' 
+          cache: true 
+      
+      # Create fake .env file
+      - name: Create .env file
+        run: touch .env
+        
+      # install packages
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Analyze code
+      - name: Analyze code
+        run: flutter analyze
+
+      # Run test
+      - name: Run test
+        run: flutter test
