@@ -26,7 +26,11 @@ jobs:
           channel: 'stable'
           flutter-version: 'any' 
           cache: true 
-
+      
+      # Create fake .env file
+      - name: Create .env file
+        run: touch .env
+        
       # install packages
       - name: Install dependencies
         run: flutter pub get
