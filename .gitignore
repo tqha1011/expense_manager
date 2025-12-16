@@ -30,3 +30,6 @@ doc/api/
 
 # Dotenv
 .env
+
+# test files
+test_screen.dart
