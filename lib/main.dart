@@ -1,8 +1,9 @@
+import 'package:expense_manager/test_screen.dart';
 import 'package:expense_manager/views/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'views/splash_screen.dart';
+import 'views/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_manager/view_models/auth_view_model.dart';
 import 'views/auth/auth_screen.dart';
@@ -19,7 +20,7 @@ Future<void> main() async{
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel())
       ],
-      child: const MyApp(),
+      child: const TestScreen(),
     )
   );
 

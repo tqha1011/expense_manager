@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:expense_manager/views/transaction/widgets/transaction_item.dart';
+import 'package:expense_manager/utils/build_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -190,11 +192,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       child: CupertinoSlidingSegmentedControl(
                         children: {
-                          0: buildSegment('Expense'),
-                          1: buildSegment('Income'),
+                          0: BuildWidget.buildSegment('Expense'),
+                          1: BuildWidget.buildSegment('Income'),
                         },
                         groupValue: selectedSegment,
-                        thumbColor: Colors.green,
+                        thumbColor: selectedSegment == 0 ? Colors.red : Colors.green,
                         onValueChanged: (int? value) {
                           setState(() {
                             selectedSegment = value;
@@ -286,21 +288,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(height: 10.0),
             // Add your recent transactions list here
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 15.0),
-              elevation: 2.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.shopping_cart, color: Colors.white),
-                ),
-                title: Text('Sample Transaction'),
-                subtitle: Text('Category'),
-                trailing: Text('-0d', style: TextStyle(color: Colors.red)),
-              ),
+            // Add an item for example
+            TransactionItem(
+              amount: 150000.0,
+              note: 'Bought fruits and vegetables',
+              date: DateTime.now(),
+              isIncome: false,
+              icon: Icons.shopping_cart,
             ),
           ],
         ),
@@ -323,13 +317,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
         ],
       ),
-    );
-  }
-
-  Widget buildSegment(String text) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(text, style: TextStyle(fontSize: 13.0)),
     );
   }
 }
