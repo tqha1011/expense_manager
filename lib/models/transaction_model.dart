@@ -2,20 +2,20 @@
 // lay nhung thu can thiet tren database ve model
 class TransactionModel {
   final int id;
-  final String title;
+  final String? title;
   final double amount;
   final DateTime date;
-  final String? note;
+  final String note;
   final int categoriesID;
   final int? eventID;
   
   TransactionModel({
     required this.id,
-    required this.title,
+    this.title,
     required this.date,
     required this.amount,
     required this.categoriesID,
-    this.note,
+    required this.note,
     this.eventID
   });
 
