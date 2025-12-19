@@ -1,7 +1,10 @@
+import 'package:expense_manager/models/categories_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:expense_manager/utils/build_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:expense_manager/views/category/category_screen.dart';
+import 'package:expense_manager/utils/app_icon.dart';
 
 class AddTransaction extends StatefulWidget {
   const AddTransaction({super.key});
@@ -19,6 +22,7 @@ class _AddTransactionState extends State<AddTransaction> {
     text: DateFormat('dd/MM/yyyy').format(DateTime.now()),
   );
   int? _selectedSegment = 0;
+  CategoriesModel? _selectedCategory;
 
   @override
   // ham don dep tai nguyen
@@ -28,6 +32,20 @@ class _AddTransactionState extends State<AddTransaction> {
     _noteController.dispose();
     _dateController.dispose();
     super.dispose();
+  }
+  Future<void> _selectCategory() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CategoryScreen(isIncome: isIncome),
+      ),
+    );
+    if (result != null && result is CategoriesModel) {
+      setState(() {
+        _selectedCategory = result;
+        _categoryController.text = _selectedCategory!.name;
+      });
+    }
   }
 
   @override
@@ -80,19 +98,18 @@ class _AddTransactionState extends State<AddTransaction> {
             SizedBox(height: 5),
 
             TextField(
+              onTap: _selectCategory,
               controller: _categoryController,
               decoration: InputDecoration(
-                labelText: 'Category',
+                labelText: _selectedCategory == null ? 'Select Category' : _selectedCategory!.name,
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.category),
+                prefixIcon: _selectedCategory == null ? Icon(Icons.category) : Icon(AppIcon.getIcon(_selectedCategory!.iconUrl)),
                 suffixIcon: IconButton(
-                  // TODO:se chuyen qua catgory screen de chon category
                   onPressed: () {},
                   icon: Icon(Icons.arrow_forward_ios, color: Colors.grey),
                 ),
               ),
-              // TODO:set onTap de xu ly su kien nhan vao cung chuyen qua category
-              onTap: () => {},
+              readOnly: true,
             ),
             SizedBox(height: 10),
             TextField(
