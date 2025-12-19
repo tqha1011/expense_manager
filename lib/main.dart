@@ -7,6 +7,7 @@ import 'views/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_manager/view_models/auth_view_model.dart';
 import 'views/auth/auth_screen.dart';
+import 'package:expense_manager/views/category/category_screen.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
