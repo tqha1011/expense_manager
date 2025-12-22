@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_manager/views/category/widgets/category_item.dart';
-import 'package:expense_manager/models/categories_model.dart';
+
 import 'package:expense_manager/view_models/category_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -13,12 +13,16 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  late List<CategoriesModel> categories;
   @override
   void initState(){
     super.initState();
     // load danh sach category tu view model
-    context.read().categoryViewModel.getCategoriesByType(widget.isIncome);
+    // dung post frame callback de tranh loi set state trong build
+    // khi widget da duoc build xong thi moi goi ham getCategoriesByType de lay du lieu
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // dung context.read de truy cap view model ma khong can lang nghe thay doi
+      context.read<CategoryViewModel>().getCategoriesByType(widget.isIncome);
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -76,9 +80,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ),
           ),
           Expanded(
-            child: Consumer<CategoryViewModel>(
+            child: Consumer<CategoryViewModel>( // su dung provider de lay du lieu tu view model
               builder: (context, categoryViewModel, child) {
-                categories = categoryViewModel.categories;
+                final categories = categoryViewModel.categories; // lay danh sach category tu view model
                 return ListView.builder(
                   itemCount: categories.length,
                   itemBuilder: (context, index) {

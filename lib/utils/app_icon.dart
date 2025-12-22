@@ -11,6 +11,8 @@ class AppIcon {
     'travel': Icons.flight,
     'education': Icons.school,
     'gift': Icons.card_giftcard,
+    'salary': Icons.attach_money,
+    'family': Icons.family_restroom,
     'other': Icons.category,
   };
    // map icon
@@ -36,13 +38,17 @@ class AppIcon {
       case 'travel':
         return Colors.teal;
       case 'education':
-        return Colors.indigo;
+        return Colors.pink;
       case 'gift':
         return Colors.yellow;
       case 'other':
         return Colors.grey;
+      case 'salary':
+        return Colors.greenAccent;
+      case 'family':
+        return Colors.cyan;
       default:
-        return Colors.black;
+        return Colors.black;  
     }
   }
 }
