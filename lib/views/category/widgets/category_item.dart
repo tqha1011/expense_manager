@@ -30,8 +30,7 @@ class _CategoryItemState extends State<CategoryItem> {
           ), // hien thi icon cua category
         ),
         title: Text(
-          //widget.category.name,
-          "Sample Category",
+          widget.category.name,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         onTap: (){

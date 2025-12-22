@@ -17,7 +17,7 @@ class CategoriesModel {
       id: json['id'],
       name: json['name'] ?? '',
       isIncome: json['is_income'] ?? false,
-      iconUrl: json['icon_url'],
+      iconUrl: json['icon'],
     );
   }
 
@@ -26,7 +26,7 @@ class CategoriesModel {
     return{
       'name': name,
       'is_income': isIncome,
-      'icon_url': iconUrl,
+      'icon': iconUrl,
     };
   }
 }

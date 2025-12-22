@@ -41,7 +41,7 @@ class TransactionModel {
       'amount': amount,
       'date' : date.toIso8601String(),
       'note' : note,
-      'categories_id': categoriesID,
+      'category_id': categoriesID,
       'event_id': eventID
     };
   }

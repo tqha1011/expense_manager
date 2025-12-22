@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:expense_manager/views/transaction/widgets/transaction_item.dart';
 import 'package:expense_manager/utils/build_widget.dart';
+import 'package:expense_manager/views/transaction/widgets/add_transaction.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +14,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int? selectedSegment = 0;
+  int _selectedIndex = 0;
+  void _navigatorTap(int index){
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SizedBox(height: 10.0),
-          
+
             Card(
               margin: EdgeInsets.symmetric(horizontal: 15.0),
               elevation: 2.0,
@@ -196,7 +203,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           1: BuildWidget.buildSegment('Income'),
                         },
                         groupValue: selectedSegment,
-                        thumbColor: selectedSegment == 0 ? Colors.red : Colors.green,
+                        thumbColor: selectedSegment == 0
+                            ? Colors.red
+                            : Colors.green,
                         onValueChanged: (int? value) {
                           setState(() {
                             selectedSegment = value;
@@ -301,7 +310,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: _selectedIndex,
+        onTap: _navigatorTap,
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
@@ -309,7 +319,25 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.wallet),
             label: 'Transactions',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: 'Add'),
+          BottomNavigationBarItem(
+            icon: IconButton(
+              icon: CircleAvatar(
+                radius: 15,
+                backgroundColor: Colors.blue,
+                child: Icon(Icons.add, color: Colors.white,size: 30,),
+              ),
+              onPressed: () {
+                // Navigate to add transaction screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddTransaction(),
+                  ),
+                );
+              }
+            ),
+            label: '',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.event_note),
             label: 'Events',
